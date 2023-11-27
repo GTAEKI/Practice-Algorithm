@@ -1,55 +1,36 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-vector<int> nums;
-vector<int> result;
-int k = 7, n = 9, ck = 0;
-
-void cal(vector<int> b) {
-    int sum = 0;
-    for (int i : b) sum += i;
-
-    if(ck == 1)
+int main()
+{
+    vector<int> heights;
+    int a = 0, sum = 0;
+    for(int i = 0; i < 9; i++)
     {
-        return;
-    }
-
-    if (sum == 100) {
-        ck = 1;
-        sort(b.begin(),b.end());
-        for (int i : b) cout << i << "\n";
-    }
-    return;
-}
-
-void combi(int start, vector<int> b) {
-    if(ck == 1)
-    {
-        return;
+        cin >> a;
+        heights.push_back(a);
+        sum += a;
     }
     
-    if (b.size() == k) {
-        cal(b);
-        return;
+    sort(heights.begin(), heights.end());
+    
+    for(int i = 0; i < 8; i++)
+    {
+        for(int j = 1; j < 9; j++)
+        {
+            if(sum - (heights[i]+heights[j]) == 100)
+            {
+                for(int k = 0; k < 9; k++)
+                {
+                    if(k == i || k == j) continue;
+                    cout << heights[k] << "\n";
+                }
+                return 0;
+            }
+        }
     }
-    for (int i = start + 1; i < n; i++) {
-        b.push_back(nums[i]);
-        combi(i, b);
-        b.pop_back();
-    }
-    return;
-}
-
-int main() {
-    for (int i = 0; i < 9; ++i) {
-        int input;
-        cin >> input;
-        nums.push_back(input); 
-    }
-
-    sort(nums.begin(), nums.end());
-
-    combi(-1, result);
-
     return 0;
+
+    
+    
 }
