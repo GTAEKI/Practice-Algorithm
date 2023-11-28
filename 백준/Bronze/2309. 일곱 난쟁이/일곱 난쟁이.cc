@@ -1,36 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main()
+int a[9], sum;
+vector<int> v;
+pair<int, int> ret;
+
+void solve()
 {
-    vector<int> heights;
-    int a = 0, sum = 0;
-    for(int i = 0; i < 9; i++)
+    for(int i = 0; i<9; i++)
     {
-        cin >> a;
-        heights.push_back(a);
-        sum += a;
-    }
-    
-    sort(heights.begin(), heights.end());
-    
-    for(int i = 0; i < 8; i++)
-    {
-        for(int j = 1; j < 9; j++)
+        for(int j = 0; j<i; j++)
         {
-            if(sum - (heights[i]+heights[j]) == 100)
+            if(sum -a[i] -a[j] == 100)
             {
-                for(int k = 0; k < 9; k++)
-                {
-                    if(k == i || k == j) continue;
-                    cout << heights[k] << "\n";
-                }
-                return 0;
+                ret = {i,j};
+                return;
             }
         }
     }
-    return 0;
+}
 
-    
-    
+int main()
+{
+    for(int i = 0; i < 9; i++)
+    {
+        cin >> a[i]; sum += a[i];
+    }
+    solve();
+    for(int i = 0; i < 9; i++)
+    {
+        if(ret.first == i || ret.second == i) continue;
+        v.push_back(a[i]);
+    }
+    sort(v.begin(),v.end());
+    for(int i : v) cout << i << " ";
+    return 0;
 }
