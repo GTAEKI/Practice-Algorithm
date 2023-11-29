@@ -1,8 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<char> can;
-int n, a[26], cnt;
+int n, a[26], cnt,c;
 string name;
 
 int main()
@@ -14,15 +13,17 @@ int main()
         a[name[0] - 'a']++;
     }
     
-    for (int i = 0; i < 26; i++) {
-        if (a[i] >= 5) {
-            cnt++;
-            cout << (char)(i + 'a');
+    for(int i : a)
+    {
+        if(i >= 5)
+        {
+            cout << (char)(cnt + 'a');
+            c++;
         }
+        cnt++;
     }
-
     
-    if(cnt == 0)
+    if(c == 0)
     {
         cout << "PREDAJA";
     }
