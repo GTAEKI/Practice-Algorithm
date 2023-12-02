@@ -23,13 +23,13 @@ int main()
     for(int i = 0; i < m; i++)
     {
         cin >> temp;
-        if(atoi(temp.c_str())==0)
+        if(isdigit(temp[0])==0)
            {
                cout << mp1[temp] << "\n";
            }
            else
            {
-               cout << mp2[atoi(temp.c_str())] << "\n";
+               cout << mp2[stoi(temp)] << "\n";
            }
     }
            return 0;
