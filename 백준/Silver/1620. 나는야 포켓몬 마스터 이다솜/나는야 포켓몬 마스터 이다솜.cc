@@ -5,7 +5,6 @@ int n,m;
 map<string,int> mp1;
 map<int,string> mp2;
 string s;
-string temp;
 
 int main()
 {
@@ -22,15 +21,15 @@ int main()
     
     for(int i = 0; i < m; i++)
     {
-        cin >> temp;
-        if(isdigit(temp[0])==0)
-           {
-               cout << mp1[temp] << "\n";
-           }
-           else
-           {
-               cout << mp2[stoi(temp)] << "\n";
-           }
+        cin >> s;
+        if(isdigit(s[0])==0)
+        {
+            cout << mp1[s] << "\n";
+        }
+        else 
+        {
+            cout << mp2[stoi(s)] << "\n";
+        }
     }
-           return 0;
+    return 0;
 }
