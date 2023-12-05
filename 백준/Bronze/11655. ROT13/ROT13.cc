@@ -1,26 +1,26 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int main() {
-    string name;
-    getline(cin, name);
+string context;
+
+int main()
+{
+    getline(cin,context);
     
-    for (int i = 0; i < name.length(); i++) 
+    for(auto i : context)
     {
-        if (isalpha(name[i])) 
+        if(i >= 'a' && i <= 'z')
         {
-            if (islower(name[i])) 
-            {
-                name[i] = 'a' + (name[i] - 'a' + 13) % 26;
-            } 
-            else
-            {
-                name[i] = 'A' + (name[i] - 'A' + 13) % 26;
-            }
+            cout << (char)('a' + ((i - 'a' + 13) % 26));
+        }
+        else if(i >= 'A' && i <= 'Z')
+        {
+            cout << (char)('A' + ((i - 'A' + 13) % 26));
+        }
+        else
+        {
+            cout << i;
         }
     }
-    
-    cout << name << endl;
-    
     return 0;
 }
