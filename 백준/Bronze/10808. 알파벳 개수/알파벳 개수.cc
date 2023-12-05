@@ -1,22 +1,20 @@
-#include<iostream>
-#include<string>
+#include<bits/stdc++.h>
 using namespace std;
 
 string name;
-int answer[26];
+int alpha[26];
 
 int main()
 {
     cin >> name;
-    
-    for(int i = 0; i < name.length(); i++)
+    for(auto i : name)
     {
-        answer[name[i] - 'a'] += 1;
+        int j = i-'a';
+        alpha[j] += 1;
     }
     
-    for(int a : answer)
+    for(int i = 0; i < 26; i++)
     {
-        cout << a << " ";
+        cout << alpha[i] << ' ';
     }
-    return 0;
 }
