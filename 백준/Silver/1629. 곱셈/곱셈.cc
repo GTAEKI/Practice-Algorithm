@@ -1,23 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 typedef long long ll;
 
 ll a,b,c;
-ll go(ll a, ll b)
+
+int go(ll _a, ll _b)
 {
-    if(b == 1) return a % c;
+    if(_b == 1) return _a % c;
     
-    ll ret = go(a,b / 2);
+    ll ret = go(_a, _b/2);
     ret = (ret * ret) % c;
-    if(b % 2) ret = (ret * a)% c;
+    if(_b%2) ret = (ret * _a)%c;
     return ret;
+    
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
     cin >> a >> b >> c;
-    cout << go(a,b) << "\n";
+    cout << go(a,b);
     return 0;
 }
