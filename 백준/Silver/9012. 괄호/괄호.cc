@@ -2,33 +2,45 @@
 using namespace std;
 
 int T;
-string a;
 
 int main()
 {
-    
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
     
     cin >> T;
+    string pt;
+    
     for(int i = 0; i < T; i++)
-    {   
-        int left = 0;
-        int right = 0; 
-        bool ck = true;
+    {
+        cin >> pt;
+        stack<char> s;
+        bool check = false;
         
-        cin >> a;
-        
-        for(char j : a)
+        for(char c : pt)
         {
-            if(j == '(') left++;
-            else if(j == ')') right++;
-            
-            if(right > left) ck = false;          
+            if(c == ')')
+            {
+                if(!s.empty() && s.top() == '(')
+                {
+                    s.pop();
+                }
+                else
+                {
+                    cout << "NO\n";
+                    check = true;
+                    break;
+                }  
+            }
+            else
+            {
+                s.push(c);
+            }
         }
         
-        if(ck == false) cout << "NO\n";
-        else if(left != right) cout << "NO\n";
-        else cout << "YES\n";
+        if(check == true) continue;
+        
+        if(s.empty()) cout << "YES\n";
+        else cout << "NO\n";
     }
-    
-    return 0;
 }
