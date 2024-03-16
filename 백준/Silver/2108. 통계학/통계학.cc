@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int cmpCount(vector<int>& arr) {
+int cmpCount(const vector<int>& arr) {
     unordered_map<int, int> countMap;
     int maxCount = 0;
 
@@ -26,6 +26,9 @@ int cmpCount(vector<int>& arr) {
 }
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    
     int N, sum = 0;
     vector<int> arr;
 
