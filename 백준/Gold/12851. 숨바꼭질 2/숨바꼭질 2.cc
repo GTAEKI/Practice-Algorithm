@@ -1,20 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int N,K;
-const int MAX = 100001;
-int visited[MAX+1];
-long long cnt[MAX+1];
+int N, K, MAX = 100000;
+int visited[100001], cnt[100001];
 
 int main()
 {
     cin >> N >> K;
-    if(N == K)
-    {
-        cout << 0 << "\n";
-        cout << 1 << "\n";
-        return 0;
-    }
     
     visited[N] = 1;
     cnt[N] = 1;
@@ -24,24 +16,22 @@ int main()
     {
         int now = que.front();
         que.pop();
-        for(int next : {now-1, now+1, now*2})
+        for(int next : {now-1,now+1,now*2})
         {
-            if(0 <= next && next <= MAX)
+            if(next < 0 || next > MAX) continue;
+            if(visited[next] == 0) // 방문한적이 없는 경우
             {
-                if(visited[next] == 0)
-                {
-                    que.push(next);
-                    visited[next] = visited[now] + 1;
-                    cnt[next] += cnt[now];
-                }
-                else if(visited[next] == visited[now] + 1)
-                {
-                    cnt[next] += cnt[now];
-                }
+                que.push(next);
+                visited[next] = visited[now] + 1;
+                cnt[next] += cnt[now];
+            }
+            else if(visited[next] == visited[now] + 1) // 방문속도가 같은경우
+            {
+                cnt[next] += cnt[now];
             }
         }
     }
-    cout << visited[K] -1 << "\n";
-    cout << cnt[K] <<"\n";
+    cout << visited[K] - 1 << "\n";
+    cout << cnt[K] << "\n";
     return 0;
 }
