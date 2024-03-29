@@ -2,7 +2,7 @@
 using namespace std;
 
 int N,K,ret;
-const int MAX = 200001;
+const int MAX = 100001;
 int visited[MAX], prevN[MAX];
 stack<int> stk;
 
