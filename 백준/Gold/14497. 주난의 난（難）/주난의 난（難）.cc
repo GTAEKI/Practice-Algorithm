@@ -51,15 +51,10 @@ int main()
         for(int j = 0; j < M ; j++)
         {
             cin >> gameMap[i][j];
-            if(gameMap[i][j] == '*')
-            {
-                pX = i;
-                pY = j;
-            }
         }
     }
     
-    que.push({pX,pY});
+    que.push({pX-1,pY-1});
     while(que.size())
     {
         int qSize = que.size();
