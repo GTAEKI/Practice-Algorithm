@@ -11,7 +11,7 @@ int cal(int num,int cnt)
     }
     else
     {
-        num = (num * 10)%n + 1%n;
+        num = (num * 10+ 1) % n;
         return cal(num, ++cnt);
     }
 }
