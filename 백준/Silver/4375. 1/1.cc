@@ -1,30 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-long n;
-long long num,cnt;
+int n;
+
+int cal(int num,int cnt)
+{
+    if(num % n == 0)
+    {
+        return cnt;
+    }
+    else
+    {
+        num = (num * 10)%n + 1%n;
+        return cal(num, ++cnt);
+    }
+}
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    
     while(cin >> n)
     {
-        num = 1;
-        cnt = 1;
-        
-        while(1)
-        {
-            if(num % n == 0)
-            {
-                cout << cnt << "\n";
-                break;
-            }
-            
-            num = (num * 10)%n + 1%n;
-            cnt++;
-        }
+        cout << cal(1,1) << "\n";
     }
     return 0;
 }
