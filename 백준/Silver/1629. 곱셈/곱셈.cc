@@ -3,22 +3,21 @@ using namespace std;
 
 typedef long long ll;
 
-ll a,b,c;
+ll A,B,C;
 
-int go(ll _a, ll _b)
+int cal(int a, int b)
 {
-    if(_b == 1) return _a % c;
+    if(b==1) return a % C;
     
-    ll ret = go(_a, _b/2);
-    ret = (ret * ret) % c;
-    if(_b%2) ret = (ret * _a)%c;
-    return ret;
-    
+    ll ret = cal(a, b/2);
+    ll ret2 = (ret * ret) % C;
+    if(b % 2) ret2 = ret2 * a % C;
+    return ret2;
 }
 
 int main()
 {
-    cin >> a >> b >> c;
-    cout << go(a,b);
+    cin >> A >> B >> C;
+    cout << cal(A,B);
     return 0;
 }
