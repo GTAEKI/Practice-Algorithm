@@ -1,20 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-string name;
-int alpha[26];
+string S;
+int arr[26];
 
 int main()
 {
-    cin >> name;
-    for(auto i : name)
+    cin >> S;
+    for(int i = 0; i < S.size(); i++)
     {
-        int j = i-'a';
-        alpha[j] += 1;
+        arr[S[i]-'a']++;
     }
     
     for(int i = 0; i < 26; i++)
     {
-        cout << alpha[i] << ' ';
+        cout << arr[i] << " ";
     }
+    return 0;
 }
