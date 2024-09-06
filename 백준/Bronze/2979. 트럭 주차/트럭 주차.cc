@@ -2,36 +2,37 @@
 using namespace std;
 
 int a,b,c;
-int from, to;
+int result[101];
 int sum;
-int times[100];
 
 int main()
 {
     cin >> a >> b >> c;
-    
     for(int i = 0; i < 3; i++)
     {
-        cin >> from >> to;
-        for(int j = from; j < to; j++)
+        int d,e;
+        cin >> d >> e;
+        for(int j = d; j < e; j++)
         {
-            times[j] += 1;
+            result[j]++;
         }
     }
     
-    for(int i : times)
+    for(int i = 0; i <= 100; i++)
     {
-        if(i == 1)
+        switch(result[i])
         {
-            sum += a;
-        }
-        else if(i == 2)
-        {
-            sum += b*2;
-        }
-        else if(i == 3)
-        {
-            sum += c*3;
+            case 0:
+                break;
+            case 1:
+                sum+= a;
+                break;
+            case 2:
+                sum+= b*2;
+                break;
+            case 3:
+                sum+= c*3;
+                break;
         }
     }
     
