@@ -18,12 +18,10 @@ int main()
         }
     }
     
-    for(int i = 0; i <= 100; i++)
+    for(int i : result)
     {
-        switch(result[i])
+        switch(i)
         {
-            case 0:
-                break;
             case 1:
                 sum+= a;
                 break;
