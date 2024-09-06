@@ -2,9 +2,8 @@
 using namespace std;
 
 int n,m;
-map<string,int> mp1;
-map<int,string> mp2;
-string s;
+map <int,string> m1;
+map <string,int> m2;
 
 int main()
 {
@@ -12,24 +11,28 @@ int main()
     cin.tie(NULL); cout.tie(NULL);
     
     cin >> n >> m;
-    for(int i = 0; i < n; i++)
+    
+    for(int i = 1; i <= n; i++)
     {
+        string s;
         cin >> s;
-        mp1[s] = i+1;
-        mp2[i+1] = s;
+        m1[i] = s;
+        m2[s] = i;
     }
     
     for(int i = 0; i < m; i++)
     {
+        string s;
         cin >> s;
-        if(isdigit(s[0])==0)
+        if(atoi(s.c_str()) == 0)
         {
-            cout << mp1[s] << "\n";
+            cout << m2[s] << '\n';
         }
-        else 
+        else
         {
-            cout << mp2[stoi(s)] << "\n";
+            cout << m1[atoi(s.c_str())] << '\n';
         }
     }
+    
     return 0;
 }
