@@ -1,31 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n, a[26], cnt,c;
+int a,cnt;
 string name;
+int alpha[128] = {0,};
 
 int main()
 {
-    cin >> n;
-    for(int i = 0; i < n; i++)
+    cin >> a;
+    for(int i = 0; i < a; i++)
     {
         cin >> name;
-        a[name[0] - 'a']++;
+        alpha[name[0]] += 1;
     }
     
-    for(int i : a)
+    for(int i = 'a'; i <= 'z'; i++)
     {
-        if(i >= 5)
+        if(alpha[i] >= 5)
         {
-            cout << (char)(cnt + 'a');
-            c++;
+            cout << (char)i;
+            cnt++;
         }
-        cnt++;
     }
-    
-    if(c == 0)
+    if(cnt == 0)
     {
         cout << "PREDAJA";
     }
     return 0;
+    
 }
