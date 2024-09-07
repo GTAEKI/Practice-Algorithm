@@ -1,30 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-long n,m,temp,cnt;
-vector<long> ar;
+int n,m;
+vector<int> arr;
+int ans;
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    
     cin >> n >> m;
     for(int i = 0; i < n; i++)
     {
-        cin >> temp;
-        ar.push_back(temp);
+        int x;
+        cin >> x;
+        arr.push_back(x);
     }
     
-    for(int i = 0; i < ar.size()-1; i++)
+    for(int i = 0; i < n; i++)
     {
-        for(int j = i; j < ar.size(); j++)
+        for(int j = i+1; j < n; j++)
         {
-            if(i==j) continue;
-            if(ar[i]+ar[j] == m)
+            if(arr[i] + arr[j] == m)
             {
-                cnt++;
+                ans++;
             }
-        }        
+        }
     }
     
-    cout << cnt;
+    cout << ans;
+    
     return 0;
 }
