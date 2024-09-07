@@ -1,35 +1,33 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n, ans;
-string ab;
-stack<char> sk;
+int n,ans;
+string s;
 
 int main()
 {
     cin >> n;
-    for(int i = 0; i < n; i++)
-    {   
-        cin >> ab;
+    
+    for(int j = 0; j < n; j++)
+    {
         
-        while(!sk.empty()) sk.pop();
-        
-        for(int j = 0; j<ab.size();j++)
+        stack<char> arr;
+        cin >> s;
+        for(int i = 0; i < s.size(); i++)
         {
-            if(!sk.empty() && sk.top() == ab[j])
+            if(arr.size() && arr.top() == s[i])
             {
-                sk.pop();
+                arr.pop();
                 continue;
             }
-            sk.push(ab[j]);
+            
+            arr.push(s[i]);
         }
         
-        if(sk.empty())
-        {
+        if(arr.size() == 0)
             ans++;
-        }
     }
-    
+        
     cout << ans;
     return 0;
 }
