@@ -6,37 +6,31 @@ string s;
 
 int main()
 {
-    cin >> n; 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    
+    cin >> n;
     cin >> s;
     
-    string front = s.substr(0, s.find('*'));
+    string front = s.substr(0,s.find('*'));
     string back = s.substr(s.find('*') + 1);
-
+    
     for(int i = 0; i < n; i++)
     {
-        string temp;
-        cin >> temp;
+        string t;
+        cin >> t;
         
-        if (temp.size() < front.size() + back.size())
+        if(t.size() < front.size()+back.size() ||
+          t.substr(0,front.size()) != front ||
+          t.substr(t.size()-back.size()) != back)
         {
-            cout << "NE\n";
-            continue;
+            cout << "NE" << "\n";
         }
-        
-        if (temp.substr(0, front.size()) != front)
+        else
         {
-            cout << "NE\n";
-            continue;
+            cout  << "DA" << "\n";
         }
-        
-        if (temp.substr(temp.size() - back.size()) != back)
-        {
-            cout << "NE\n";
-            continue;
-        }
-        
-        cout << "DA\n";
     }
-
+    
     return 0;
 }
