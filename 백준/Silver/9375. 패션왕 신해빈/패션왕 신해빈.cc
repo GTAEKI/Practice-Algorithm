@@ -1,40 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int testCase,n,cnt;
-string s1,s2;
-
+int t;
 
 int main()
 {
-    cin >> testCase;
-    for(int i = 0; i < testCase; i++)
+    cin >> t;
+    while(t--)
     {
+        int n = 0;
         cin >> n;
-        
-        cnt = 0; // 테스트케이스별 초기화
-        map<string, int> cloth;
-        
-        for(int j = 0; j < n; j++) //케이스 맵에 입력
+        map<string, int> m1;
+        for(int i = 0; i < n; i++)
         {
-            cin >> s1 >> s2;
-            if(cloth.find(s2) == cloth.end())
-            {
-                cloth.insert({s2,1});    
-            }
-            else cloth[s2] ++;
-                
-            cnt++; // 의상별 1번씩은 입을 수 있음
+            string a,b;
+            cin >> a >> b;
+            
+            m1[b]++;
         }
         
-       int ans = 1;
-        for (auto i : cloth)
+        long long ret = 1;
+        for(auto i : m1)
         {
-            ans *= (i.second + 1);
+            ret *= ((long long)i.second + 1);
         }
-        ans -= 1;
-        cout << ans << '\n';
-        
+        ret--;
+        cout << ret << "\n";
     }
     return 0;
 }
