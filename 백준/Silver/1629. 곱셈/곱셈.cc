@@ -3,21 +3,21 @@ using namespace std;
 
 typedef long long ll;
 
-ll A,B,C;
+ll a,b,c;
 
-int cal(int a, int b)
+ll cal(int n, int m)
 {
-    if(b==1) return a % C;
+    if(m == 1) return n % c;
     
-    ll ret = cal(a, b/2);
-    ll ret2 = (ret * ret) % C;
-    if(b % 2) ret2 = ret2 * a % C;
-    return ret2;
+    ll ret = cal(n, m/2);
+    ret = (ret * ret ) % c;
+    if(m & 1) ret = (ret * n) % c;
+    return ret;
 }
 
 int main()
 {
-    cin >> A >> B >> C;
-    cout << cal(A,B);
+    cin >> a >> b >> c;
+    cout << cal(a,b);
     return 0;
 }
