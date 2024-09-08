@@ -1,19 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-const int max_n = 104;
-int dy[4] = {-1,0,1,0};
-int dx[4] = {0,1,0,-1};
-int n,m,a[max_n][max_n], visited[max_n][max_n],y,x;
+int n,m,y,x;
+int dx[4] = {-1,0,1,0};
+int dy[4] = {0,-1,0,1};
+bool mapp[104][104];
+int visited[104][104];
 
 int main()
 {
-    scanf("%d %d",&n,&m);
+    cin >> n >> m;
     for(int i = 0; i < n; i++)
     {
-        for(int j = 0; j< m; j++)
+        string str;
+        cin >> str;
+        for(int j = 0; j < m; j++)
         {
-            scanf("%1d", &a[i][j]);
+            mapp[i][j] = str[j] - '0';
         }
     }
     
@@ -22,17 +25,20 @@ int main()
     q.push({0,0});
     while(q.size())
     {
-        tie(y,x) = q.front(); q.pop();
+        tie(y,x) = q.front();
+        q.pop();
         for(int i = 0; i < 4; i++)
         {
             int ny = y + dy[i];
             int nx = x + dx[i];
-            if(ny < 0 || ny >= n || nx < 0 || nx >= m || a[ny][nx] == 0) continue;
+            
+            if(nx < 0 || ny < 0 || nx >= m || ny >= n || mapp[ny][nx] == 0) continue;
             if(visited[ny][nx]) continue;
-            visited[ny][nx] = visited[y][x] +1;
+            
+            visited[ny][nx] = visited[y][x] + 1;
             q.push({ny,nx});
         }
     }
-    printf("%d", visited[n-1][m-1]);
+    cout << visited[n-1][m-1];
     return 0;
 }
