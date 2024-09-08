@@ -1,57 +1,72 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int dy[4] = {1,0,-1,0};
-int dx[4] = {0,1,0,-1};
-int m,n,k,y,x,ret,ny,nx,t;
-int a[51][51];
-bool visited[51][51];
-void dfs(int y, int x)
+int t,m,n,k;
+int mp[51][51];
+int visited[51][51];
+
+int dy[4] = {0,1,0,-1};
+int dx[4] = {1,0,-1,0};
+
+void bfs(int ty, int tx)
 {
-    visited[y][x] = 1;
-    for(int i = 0; i< 4; i++)
+    queue<pair<int,int>> q;
+    q.push({ty,tx});
+    visited[ty][tx] = 1;
+    
+    int y,x;
+    
+    while(q.size())
     {
-        ny = y+dy[i];
-        nx = x+dx[i];
-        if(ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
-        if(a[ny][nx] == 1 && !visited[ny][nx])
+        tie(y,x) = q.front();
+        q.pop();
+        
+        for(int i = 0; i < 4; i++)
         {
-            dfs(ny,nx);
+            int ny = y + dy[i];
+            int nx = x + dx[i];
+            
+            if(ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
+            if(mp[ny][nx] != 1 || visited[ny][nx]) continue;
+            
+            q.push({ny,nx});
+            visited[ny][nx] = 1;
         }
     }
-    return;
 }
-
 
 int main()
 {
-    cin.tie(NULL);
-    cout.tie(NULL);
     cin >> t;
-    while(t--)
+    
+    for(int i = 0; i < t; i++)
     {
-        fill(&a[0][0], &a[0][0] + 51 * 51, 0);
-        fill(&visited[0][0], &visited[0][0] + 51 * 51, 0);
-        ret = 0;
-        cin >> m >> n >> k;
-        for(int i = 0; i< k; i++)
-        {
-            cin >> x >> y;
-            a[y][x] =1;
-        }
+        memset(mp,0,sizeof(mp));
+        memset(visited,0,sizeof(visited));
+        int cnt = 0;
         
-        for(int i = 0; i < n; i++)
+        cin >> m >> n >> k;
+        
+        for(int j = 0; j  < k; j++)
         {
-            for(int j = 0; j < m; j++)
+            int t1,t2;
+            cin >> t1 >> t2;
+            mp[t2][t1] = 1;
+        } 
+        
+        for(int j = 0; j < n; j++)
+        {
+            for(int k = 0; k < m; k++)
             {
-                if(a[i][j] == 1 && !visited[i][j])
+                if(visited[j][k] != 1 && mp[j][k] == 1)
                 {
-                    dfs(i,j);
-                    ret++;
+                    bfs(j,k);
+                    cnt++;
                 }
             }
         }
-        cout << ret << "\n";
+        
+        cout << cnt << "\n";
     }
     return 0;
 }
