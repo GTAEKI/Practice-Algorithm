@@ -1,34 +1,37 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n, c, a[1004];
-vector<pair<int, int>> v;
-map<int,int> mp, mp_first;
-bool cmp(pair<int,int> a, pair<int,int> b)
+int n,c;
+unordered_map<int,int> mp, mp_first;
+int arr[1004];
+vector<pair<int,int>> v;
+
+bool cmp(pair<int,int> x, pair<int,int> y)
 {
-    if(a.first == b.first)
+    if(x.first == y.first)
     {
-        return mp_first[a.second] < mp_first[b.second];
+        return mp_first[x.second] < mp_first[y.second];
     }
-    return a.first > b.first;
+    return x.first > y.first;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    cin>> n >> c;
-    for(int i = 0; i<n; i++)
+    cin >> n >> c;
+    for(int i = 0; i < n; i++)
     {
-        cin >> a[i];
-        mp[a[i]]++;
-        if(mp_first[a[i]]==0) mp_first[a[i]] = i+1;
+        cin >> arr[i];
+        mp[arr[i]]++;
+        if(mp_first[arr[i]] == 0) mp_first[arr[i]] = i+1;    
     }
-    for(auto it:mp)
+    
+    for(auto i : mp)
     {
-        v.push_back({it.second, it.first});
+        v.push_back({i.second, i.first});
     }
+    
     sort(v.begin(),v.end(),cmp);
+    
     for(auto i : v)
     {
         for(int j = 0; j < i.first; j++)
