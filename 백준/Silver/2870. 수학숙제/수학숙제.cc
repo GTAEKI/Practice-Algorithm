@@ -1,64 +1,53 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-using namespace std;
-bool cmp(string a, string b)
+int n;
+string s, temp;
+vector<string> arr;
+
+bool cmp (string a, string b)
 {
-    if (a.length() == b.length())
-        return a < b;
-    else
-        return a.length() < b.length();
+    if(a.size() == b.size())
+    {
+        return a<b;
+    }
+    
+    return a.size() < b.size();
 }
+
+void cal()
+{
+    while(true)
+    {
+        if(temp.size() && temp.front() == '0') temp.erase(temp.begin());
+        else break;
+    }
+    
+    if(temp.size() == 0) temp = "0";
+    arr.push_back(temp);
+    temp = "";
+}
+
 int main()
 {
-    int n;
     cin >> n;
-    vector<string> v;
-    for (int q = 0; q < n; q++)
+    for(int i = 0; i < n; i++)
     {
-        string temp;
-        cin >> temp;
-        string ans = "";
-        for (int i = 0; i < temp.length(); i++)
+        cin >> s;
+        for(int j = 0; j < s.size(); j++)
         {
-            if (temp[i] >= '0' && temp[i] <= '9')
-            {
-                ans += temp[i];
-            }
-            else
-            {
-                if (ans != "")
-                {
-                    string anst = "";
-                    for (int j = 0; j < ans.length(); j++)
-                    {
-                        if (anst == "" && ans[j] == '0')
-                            continue;
-                        anst += ans[j];
-                    }
-                    if (anst == "")
-                        anst += '0';
-                    v.push_back(anst);
-                }
-                ans = "";
-            }
+            if(s[j] >= '0' && s[j] <= '9') temp += s[j];
+            else if(temp.size()) cal();
         }
-        if (ans != "")
-        {
-            string anst = "";
-            for (int j = 0; j < ans.length(); j++)
-            {
-                if (anst == "" && ans[j] == '0')
-                    continue;
-                anst += ans[j];
-            }
-            if (anst == "")
-                anst += '0';
-            v.push_back(anst);
-        }
+        if(temp.size()) cal();
     }
-    sort(v.begin(), v.end(), cmp);
-    for (int i = 0; i < v.size(); i++)
+    
+    sort(arr.begin(), arr.end(),cmp);
+    
+    for(int i = 0; i < arr.size(); i++)
     {
-        cout << v[i] << "\n";
+        cout << arr[i] << "\n";
     }
+    
+    
+    return 0;
 }
