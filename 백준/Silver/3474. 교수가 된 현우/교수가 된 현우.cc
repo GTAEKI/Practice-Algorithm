@@ -1,27 +1,25 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int T, N;
+int t,n;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    cin >> T;
-    for(int i = 0; i<T; i++)
+    ios_base::sync_with_stdio(false);cin.tie(NULL); cout.tie(NULL);
+    cin >> t;
+    for(int i = 0; i < t; i++)
     {
-        cin >> N;
-        int ret2 = 0, ret5 = 0;
-        for(int j = 2; j <=N; j *= 2)
+        cin >> n;
+        int r2 = 0,r5 = 0;
+        for(int j = 2; j <= n; j *= 2)
         {
-            ret2 += N / j;
+            r2 += n/j;
         }
-        for(int j = 5; j<=N; j *= 5)
+        for(int j = 5; j <= n; j *= 5)
         {
-            ret5 += N / j;
+            r5 += n/j;
         }
-        
-        cout << min(ret2,ret5) << "\n";
+        cout << min(r2,r5) << "\n";
     }
     return 0;
 }
