@@ -1,32 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int N;
+int n,cnt,ret;
+string temp;
 
 int main()
 {
-    cin >> N;
-    int temp = 666;
-    int ans = 0;
-    int cnt = 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(nullptr);
+    
+    cin >> n;
     
     while(true)
     {
-        if(to_string(temp).find("666") != -1)
+        ret++;
+        if(to_string(ret).find("666") != string::npos)
         {
             cnt++;
-            ans = temp;
         }
         
-        if(cnt == N)
-        {
-            break;
-        }
-        
-        temp++;
+        if(cnt == n) break;
     }
     
-    cout << ans;
-    
+    cout << ret <<"\n";
     return 0;
 }
