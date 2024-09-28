@@ -1,46 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int T;
+int n;
+stack<char> l;
+string s;
+bool flag = false;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    
-    cin >> T;
-    string pt;
-    
-    for(int i = 0; i < T; i++)
+    cin >> n;
+    for(int i = 0 ;i < n; i++)
     {
-        cin >> pt;
-        stack<char> s;
-        bool check = false;
+        cin >> s;
+        flag = false;
+        while(!l.empty()) l.pop();
         
-        for(char c : pt)
+        for(int j = 0;  j< s.size(); j++)
         {
-            if(c == ')')
+            if(s[j] == '(') l.push(s[j]);
+            else 
             {
-                if(!s.empty() && s.top() == '(')
+                if(l.empty() == true)
                 {
-                    s.pop();
-                }
-                else
-                {
-                    cout << "NO\n";
-                    check = true;
+                    flag = true;
                     break;
-                }  
-            }
-            else
-            {
-                s.push(c);
+                }
+                
+                l.pop();
             }
         }
         
-        if(check == true) continue;
-        
-        if(s.empty()) cout << "YES\n";
-        else cout << "NO\n";
+        if(flag == false && l.empty()) cout << "YES" << "\n";
+        else cout << "NO" << "\n";
     }
+    return 0;
+    
 }
