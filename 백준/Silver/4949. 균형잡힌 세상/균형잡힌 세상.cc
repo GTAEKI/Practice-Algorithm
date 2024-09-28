@@ -1,49 +1,57 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-string a;
+string s;
 
-int main()
+int main() 
 {
-    while(true)
+    while (true) 
     {
-        getline(cin,a);
+        stack<char> stk;
+        bool f1 = false, f2 = false;
+
+        getline(cin, s);
         
-        if(a == ".") break;
-        
-        stack<char> pt;
-        bool isValid = true;
-        
-        for(char c : a)
+        if (s.size() == 1 && s[0] == '.') 
         {
-            if(c == '(' || c == '[')
+            break;
+        }
+
+        for (int i = 0; i < s.size(); i++) 
+        {
+            if (s[i] == '(' || s[i] == '[') 
             {
-                pt.push(c);
-            }
-            else if(c == ')')
+                stk.push(s[i]);
+            } 
+            else if (s[i] == ')') 
             {
-                if(pt.empty() || pt.top() != '(')
+                if (stk.empty() || stk.top() != '(') 
                 {
-                    isValid = false;
+                    f1 = true;
                     break;
                 }
-                pt.pop();
-            }
-            else if(c == ']')
+                stk.pop();
+            } 
+            else if (s[i] == ']') 
             {
-                if(pt.empty() || pt.top() != '[')
+                if (stk.empty() || stk.top() != '[') 
                 {
-                    isValid = false;
+                    f1 = true;
                     break;
                 }
-                pt.pop();
+                stk.pop();
             }
         }
-        
-        if(pt.empty() == false) isValid = false;
-        
-        if(isValid) cout << "yes" << "\n";
-        else cout << "no" << "\n";
+
+        if (!f1 && stk.empty()) 
+        {
+            cout << "yes" << "\n";
+        } 
+        else 
+        {
+            cout << "no" << "\n";
+        }
     }
+
     return 0;
 }
