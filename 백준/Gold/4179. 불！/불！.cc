@@ -1,96 +1,92 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int R, C,jY,jX,fY,fX;
-const int INF = 987654321;
-char mapp[1001][1001];
-int visited[1001][1001];
-int fvisited[1001][1001];
-int dy[4] = {0,1,0,-1};
-int dx[4] = {1,0,-1,0};
-queue<pair<int,int>> fQue;
-
-void fireBFS()
-{
-    int y,x = 0;
-    while(!fQue.empty())
-    {
-        tie(y,x) = fQue.front();
-        fQue.pop();
-        
-        for(int i = 0; i < 4; ++i)
-        {
-            int ny = y + dy[i];
-            int nx = x + dx[i];
-            
-            if(ny < 0 || nx < 0 || ny >= R || nx >= C) continue;
-            else if (mapp[ny][nx] == '#') continue;
-            else if (fvisited[ny][nx] == INF)
-            {
-                fvisited[ny][nx] = fvisited[y][x] + 1;
-                fQue.push({ny,nx});
-            }
-        }
-    }
-}
-
-int userBFS(int y, int x)
-{
-    visited[y][x] = 1;
-    queue<pair<int,int>> que;
-    que.push({y,x});
-    while(!que.empty())
-    {
-        tie(y,x) = que.front();
-        que.pop();
-        
-        for(int i = 0; i < 4; ++i)
-        {
-            int ny = y + dy[i];
-            int nx = x + dx[i];
-            
-            if(ny < 0 || nx < 0 || ny >= R || nx >= C)
-            {
-                return visited[y][x];
-            }
-            else if (visited[ny][nx]) continue;
-            else if (mapp[ny][nx] == '#') continue;
-            else if (visited[y][x] + 1 >= fvisited[ny][nx]) continue;
-            visited[ny][nx] = visited[y][x] + 1;
-            que.push({ny,nx});
-        }
-    }
-    return 0;
-}
+string mapp[1004];
+int fireDist[1004][1004];
+int personDist[1004][1004];
+int dx[4] = {0,1,0,-1};
+int dy[4] = {1,0,-1,0};
 
 int main()
 {
-    bool isFire = false;
+    int R,C;
     
     cin >> R >> C;
-    fill(&fvisited[0][0], &fvisited[0][0] + (1001 * 1001), INF);
-    for(int j = 0; j < R; ++j)
+    for(int i = 0; i < R; i++)
     {
-        for(int i = 0; i < C; ++i)
+        cin >> mapp[i];
+    }
+    
+    for(int i = 0; i < R; i++)
+    {
+        fill(fireDist[i],fireDist[i]+C,-1);
+        fill(personDist[i],personDist[i]+C,-1);
+    }
+    
+    queue<pair<int,int>> fireQ;
+    queue<pair<int,int>> personQ;
+    bool isEscape = false;
+    
+    for(int i = 0; i < R; i++)
+    {
+        for(int j = 0; j < C; j++)
         {
-            cin >> mapp[j][i];
-            if(mapp[j][i] == 'J')
+            if(mapp[i][j] == 'F')
             {
-                jY = j;
-                jX = i;
+                fireQ.push({i,j});
+                fireDist[i][j] = 0;
             }
-            else if(mapp[j][i] == 'F')
+            else if(mapp[i][j] == 'J')
             {
-                fQue.push({j,i});
-                fvisited[j][i] = 1;
+                personQ.push({i,j});
+                personDist[i][j]= 0;
             }
         }
     }
     
-    fireBFS();
-    int result = userBFS(jY,jX);
+    while(!fireQ.empty())
+    {
+        pair<int,int> now = fireQ.front();
+        fireQ.pop();
+        
+        for(int dir = 0; dir < 4; dir++)
+        {
+            int nx = now.first + dx[dir];
+            int ny = now.second + dy[dir];
+            
+            if(nx < 0 || nx >= R || ny < 0 || ny >= C) continue;
+            if(mapp[nx][ny] == '#'|| fireDist[nx][ny] != -1) continue;
+            
+            fireDist[nx][ny] = fireDist[now.first][now.second]+1;
+            fireQ.push({nx,ny});
+        }
+    }
     
-    if(result != 0) cout << result;
-    else cout << "IMPOSSIBLE";
+    while(!personQ.empty() && !isEscape)
+    {
+        pair<int,int> now = personQ.front();
+        personQ.pop();
+        
+        for(int dir = 0; dir < 4; dir++)
+        {
+            int nx = now.first + dx[dir];
+            int ny = now.second + dy[dir];
+            
+            if(nx < 0 || nx >= R || ny < 0 || ny >= C)
+            {
+                isEscape = true;
+                cout << personDist[now.first][now.second] + 1;
+                break;
+            }
+            else if(mapp[nx][ny] == '#' || personDist[nx][ny] != -1) continue;
+            else if(fireDist[nx][ny] != -1 && fireDist[nx][ny] <= personDist[now.first][now.second]+1) continue;
+            
+            personDist[nx][ny] = personDist[now.first][now.second] + 1;
+            personQ.push({nx,ny});
+        }
+    }
+    
+    if(!isEscape) cout << "IMPOSSIBLE";
+    
     return 0;
 }
